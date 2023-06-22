@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animation</title>
+    <style>
+      .container {
+        width: 200px;
+        height: 200px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        perspective: 800px;
+      }
+
+      .shape {
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform-style: preserve-3d;
+        animation: spin 4s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: translate(-50%, -50%) rotateX(0) rotateY(0) rotateZ(0);
+        }
+        25% {
+          transform: translate(-50%, -50%) rotateX(360deg) rotateY(0) rotateZ(0);
+        }
+        50% {
+          transform: translate(-50%, -50%) rotateX(360deg) rotateY(360deg)
+            rotateZ(0);
+        }
+        75% {
+          transform: translate(-50%, -50%) rotateX(360deg) rotateY(360deg)
+            rotateZ(360deg);
+        }
+        100% {
+          transform: translate(-50%, -50%) rotateX(0) rotateY(0) rotateZ(0);
+        }
+      }
+
+      .shape:before,
+      .shape:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #ffac33;
+        opacity: 0.7;
+        border-radius: 50%;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        transition: transform 0.5s ease-in-out;
+      }
+
+      .shape:before {
+        transform: translateZ(-50px);
+      }
+
+      .shape:after {
+        transform: translateZ(50px);
+      }
+
+      .container:hover .shape:before,
+      .container:hover .shape:after {
+        transform: scale(1.2);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="shape"></div>
+    </div>
+  </body>
+</html>
